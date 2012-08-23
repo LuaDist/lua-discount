@@ -1,6 +1,6 @@
 --- This file is part of LuaDist project
 
-name = "lua_discount"
+name = "lua-discount"
 version = "1.2.10.1"
 
 desc = "A binding to Discount, a fast C implementation of the Markdown text to HTML markup  system."

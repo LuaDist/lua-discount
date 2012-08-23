@@ -1,23 +1,19 @@
-# Copyright (C) 2007-2009 LuaDist.
+# Copyright (C) 2007-2012 LuaDist.
 # Created by Peter Kapec
 # Redistribution and use of this file is allowed according to the terms of the MIT license.
 # For details see the COPYRIGHT file distributed with LuaDist.
 # Please note that the package source code is licensed under its own license.
 
-PROJECT(lua_discount C)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-INCLUDE(dist.cmake)
+project ( lua_discount C )
+cmake_minimum_required ( VERSION 2.8 )
+include ( cmake/dist.cmake )
+include ( lua )
 
-# Build
-INCLUDE_DIRECTORIES(.)
+if ( WIN32 )
+  add_definitions ( -DWINDOWS )
+endif ( )
 
-IF(WIN32)
-	ADD_DEFINITIONS(-DWINDOWS)
-ENDIF()
-
-ADD_LUA_MODULE(discount docheader.c dumptree.c generate.c markdown.c mkdio.c resource.c ldiscount.c discount.def)
-
-# Install all files and documentation
-INSTALL (TARGETS discount DESTINATION ${INSTALL_CMOD})
-INSTALL (FILES LICENSE README.mkd DESTINATION ${INSTALL_DATA})
-INSTALL (FILES bench.lua test_discount.lua DESTINATION ${INSTALL_TEST})
+install_lua_module ( discount docheader.c dumptree.c generate.c markdown.c mkdio.c resource.c 
+  ldiscount.c discount.def )
+install_data ( LICENSE README.mkd )
+install_test ( bench.lua test_discount.lua )
