@@ -1,0 +1,31 @@
+type = "x86"
+arch = "Windows"
+author = "A.S. Bradbury"
+depends = {
+[[lua ~> 5.1]],
+[[lunit >= 0.4]],
+}
+
+desc = "A binding to Discount, a fast C implementation of the Markdown text to HTML markup  system."
+version = "1.2.10.1"
+maintainer = "Peter Kapec"
+files = {
+Runtime = {
+[[lib\lua\discount.dll]],
+}
+,
+Data = {
+[[share\lua-discount\LICENSE]],
+[[share\lua-discount\README.mkd]],
+}
+,
+Test = {
+[[share\lua-discount\test\bench.lua]],
+[[share\lua-discount\test\test_discount.lua]],
+}
+,
+}
+
+license = "BSD-style license"
+name = "lua-discount"
+url = "http://luaforge.net/projects/lua-discount/"
