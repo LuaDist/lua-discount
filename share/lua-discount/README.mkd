@@ -1,0 +1,93 @@
+# lua-discount
+
+A binding to [Discount](http://www.pell.portland.or.us/~orc/Code/discount/), a 
+fast C implementation of the 
+[Markdown](http://daringfireball.net/projects/markdown) text to HTML markup 
+system. Discount passes the Markdown test suite.
+
+## Project links
+* [Home](http://asbradbury.org/projects/lua-discount/)
+* [Download](http://luaforge.net/projects/lua-discount/)
+* [Documentation](http://asbradbury.org/projects/lua-discount/#usage)
+* [Source](http://github.com/asb/lua-discount/)
+
+## Release history
+* lua-discount-1.2.10.1 (2008-09-22)
+  * Windows is now a supported platform (thanks to contributions from Tim 
+    Channon)
+* lua-discount-1.2.10 (2008-09-03)
+  * update to upstream Discount 1.2.10
+  * support the `"nohtml"` option, to disable embedded html.
+  * compile to use relaxed emphasis, meaning underscores don't count when 
+    they're in the middle of a word.
+  * add some tests
+  * include results of a simple benchmark in the readme
+* lua-discount-1.2.7 (2008-08-03)
+  * first public release
+
+## See also
+* [Discount](http://www.pell.portland.or.us/~orc/Code/discount/)
+* [Markdown syntax](http://daringfireball.net/projects/markdown/syntax)
+* [markdown.lua](http://www.frykholm.se/files/markdown.lua)
+
+## Performance
+Thanks to the underlying Discount implementation, lua-discount is incredibly 
+fast. Benchmarking markdown.lua 0.32 against lua-discount 1.2.10 by parsing 
+the [Markdown syntax 
+document](http://daringfireball.net/projects/markdown/syntax.text) 100 times 
+gives the following result (all figures are in seconds):
+
+                       user     system      total       real
+    lua-discount   0.170000   0.000000   0.170000   0.177374
+    markdown.lua  48.530000   0.000000  48.530000  48.524910
+
+## [Usage](id:usage)
+Note that `require("discount")` returns a single function, which you are 
+responsible for giving a suitable name. Example:
+
+    discount = require("discount")
+
+    local markdown_string = [[
+      # Demonstration
+      This is a demonstration of lua-discount. Passing the options `"nolinks"` 
+      disables links such as [this](http://example.com).
+      ]]
+      
+      local html_string = discount(markdown_string, "nolinks")
+
+The `discount` function takes as its first argument the Markdown string to 
+convert, and for its subsequent arguments takes any combination of the 
+following strings as options:
+
+=`"nolinks"`=
+    do not allow `<a` or expand Markdown links.
+=`"noimages"`=
+    do not allow `<img` or expand Markdown images.
+=`"nopants"`=
+    disable [SmartyPants](http://daringfireball.net/projects/smartypants/) 
+    processing.
+=`"nohtml"`=
+    disallow embedded html by replacing all `<` with `&lt;`.
+=`"tagtext"`=
+    don't expand `*` or `_` when used for emphasis.
+=`"noext"`=
+    do not process 
+    [pseudo-protocols](http://www.pell.portland.or.us/~orc/Code/discount/#pseudo)
+=`"cdata"`=
+    generate output suitable for use as data in an XML document.
+= `"embed"`=
+    equivalent to specifying `"nolinks"`, `"noimages"` and `"tagtext"`.
+
+## License and acknowledgements
+lua-discount is distributed under [a BSD-style 
+license](http://github.com/asb/lua-discount/tree/master/LICENSE).
+
+Thanks to Tim Channon for Windows support.
+
+This product includes software developed by [David Loren 
+Parsons](http://www.pell.portland.or.us/~orc).
+
+## Contact
+Author: A.S. Bradbury  
+Email: <asb@asbradbury.org>  
+Homepage: <http://asbradbury.org/>
